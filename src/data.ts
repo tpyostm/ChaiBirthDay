@@ -1,6 +1,7 @@
-export type YesNoQuestion = {
+export type VisualQuizQuestion = {
   prompt: string
-  correctAnswer: boolean
+  options: string[]
+  correctAnswerIndex: number
   retryMessage: string
   successMessage: string
 }
@@ -11,92 +12,95 @@ export type MultipleChoiceQuestion = {
   correctAnswerIndex: number
   retryMessage: string
   successMessage: string
+  acceptAnyAnswer?: boolean
+  imageLabel: string
 }
 
-export const visualNovelQuestions: YesNoQuestion[] = [
+export const siteProfile = {
+  recipientName: 'ไอเบียวช่าย',
+  nickname: 'คุน',
+  signature: 'เพือนที่ยอมฟังมุก Vergil, HIGGS, Joel และเพลย์ลิสต์ Nirvana ของคุนเสมอ',
+  coverSticker: 'สำหรับช่ายโดยเฉพาะ',
+  warningSticker: 'ใช้เวลาไม่นาน เล่นแปปเดียวว',
+  finalTagline: 'from your anime-and-gacha enabler',
+  collectorNote:
+    'collector note: หน้านี้มีกลิ่นคล้ายสีเทียน ปลา ของสีแดง กาชาเกลือ และความเอ็นดูคุนแบบปิดไม่มิด',
+}
+
+export const visualNovelQuestions: VisualQuizQuestion[] = [
   {
-    prompt: 'Is today officially your day to be spoiled extra, smiled at extra, and adored extra?',
-    correctAnswer: true,
-    retryMessage: 'Hmm... suspicious answer. Birthday royalty should probably pick the sweeter option.',
-    successMessage: 'Correct. The birthday cutie remembers the rules of the universe.',
+    prompt: '',
+    options: ['Chester grill', 'Sizzler'],
+    correctAnswerIndex: 0,
+    retryMessage: 'ไม่ใช่เฟร้ย',
+    successMessage: 'เก่งมากๆๆทำได้ดีหนิ',
   },
   {
-    prompt: 'Would I ever build a whole tiny birthday world without packing it with teasing and affection?',
-    correctAnswer: false,
-    retryMessage: 'Hehe, nice try. This surprise was always going to be overflowing with both.',
-    successMessage: 'Exactly. Maximum affection. Zero restraint.',
+    prompt: '',
+    options: ['ร้านเขียว', 'ร้านข้างๆร้านเขียว'],
+    correctAnswerIndex: 0,
+    retryMessage: 'ไม่ใช่เฟร้ย',
+    successMessage: 'จริงๆชั้นก็ไม่แน่ใจเหมือนกัน 55555',
   },
   {
-    prompt: 'Should the birthday star continue and claim their very deserved present?',
-    correctAnswer: true,
-    retryMessage: 'That sounded adorably shy. Let’s try the confident birthday answer.',
-    successMessage: 'Yay. March onward, birthday star. Your present is waiting.',
+    prompt: '',
+    options: ['KFC', 'Macdonald'],
+    correctAnswerIndex: 0,
+    retryMessage: 'ไม่ใช่เฟร้ย',
+    successMessage: 'ประทับใจนะ อย่างน้อยก็ยังจำได้',
   },
 ]
 
 export const mcqQuestions: MultipleChoiceQuestion[] = [
   {
-    prompt: 'Which energy fits this birthday journey best?',
-    options: [
-      'Soft hearts, sparkles, and sweet chaos',
-      'Strict serious exam room',
-      'Mysterious villain training arc',
-      'Monday morning spreadsheet mood',
-    ],
+    prompt: 'ฉากนี้คือวันที่เท่าไหร่ในเกม',
+    options: ['June 15', 'July 15', 'June 25', 'July 25'],
     correctAnswerIndex: 0,
-    retryMessage: 'That answer is far too serious for a page this covered in pink.',
-    successMessage: 'Exactly. The official vibe is sweet chaos with perfect birthday sparkle.',
+    retryMessage: 'เอาดีๆๆๆ',
+    successMessage: 'เก่งมากค่อยสมกับรูปโปรเวอจิลหน่อย',
+    imageLabel: 'รูปประกอบข้อ 1',
   },
   {
-    prompt: 'What should happen when the birthday person smiles?',
-    options: [
-      'Nothing at all',
-      'At least three invisible hearts should appear',
-      'The website should file taxes',
-      'A dramatic thunderstorm should begin',
-    ],
+    prompt: 'เชื้อราปรสิตในเกมนี้ใช้ชื่อว่าอะไร',
+    options: ['Copilot', 'Cordycept', 'Ringworm', 'Ringjingjing'],
     correctAnswerIndex: 1,
-    retryMessage: 'Cute, but no. This birthday universe runs on smiles and suspiciously many hearts.',
-    successMessage: 'Correct. Invisible hearts are now legally required.',
+    retryMessage: 'อาจจะยังนะ',
+    successMessage: 'เยี่ยยมม เก่งว่า',
+    imageLabel: 'รูปประกอบข้อ 2',
   },
   {
-    prompt: 'Which reward does the birthday hero deserve most?',
-    options: [
-      'A boring pat on the back',
-      'One tiny crumb of joy',
-      'A whole bundle of love, treats, and happy memories',
-      'Homework with extra steps',
-    ],
-    correctAnswerIndex: 2,
-    retryMessage: 'Nope. We are not doing low-effort rewards on this special day.',
-    successMessage: 'Perfect answer. Bundle of joy unlocked with zero hesitation.',
+    prompt: 'เกมต่อไปที่แกจะต้องเล่นคืออะไร',
+    options: ['Resident Evil 3', 'Resident Evil 4', 'Resident Evil 7', 'Resident Evil 8'],
+    correctAnswerIndex: 0,
+    retryMessage: 'จริงๆข้อนี้คุนจะเล่นไรก็ได้แหละ อิอิ',
+    successMessage: 'จริงๆข้อนี้คุนจะเล่นไรก็ได้แหละ อิอิ',
+    acceptAnyAnswer: true,
+    imageLabel: 'รูปประกอบข้อ 3',
   },
 ]
 
 export const slotRewards = [
-  'A dessert date chosen by you',
-  'A cuddle coupon with no expiration',
-  'A victory selfie session together',
-  'One playlist made just for your mood',
-  'A surprise snack delivery mission',
-  'A golden pass to pick our next little adventure',
+  'Resident Evil 7',
+  'Resident Evil 7 + เสื้อ 1 ตัว',
+  'Resident Evil 7+8',
+  'Resident Evil 7+8+3',
+  'Resident Evil 7+8+3 และเสื้อ 1 ตัว',
 ]
 
 export const subjectiveQuestion = {
-  prompt: 'Final checkpoint: what are the two most important words this birthday site wants to tell you?',
-  answer: 'happy birthday',
-  acceptedKeywords: ['happy', 'birthday'],
-  retryMessage:
-    'So close, birthday bean. It is the classic phrase this whole little world has been wrapping up for you.',
-  successMessage: 'Yes. The password of the day has been spoken perfectly.',
+  prompt: 'ด่านสุดท้าย : ชื่อนามสกุลตรูภาษาไทยเขียนยังไง (spacebar เว้นให้ด้วยนะ เช่น ณัฐชยา พัวจันทร์)',
+  answer: 'ปิยะพล สุนทรารชุน',
+  acceptedKeywords: ['ปิยะพล', 'สุนทรารชุน'],
+  retryMessage: 'ให้โอกาส 3 ครั้ง',
+  successMessage: 'ถูกต้องงง จำได้ด้วย',
 }
 
-export const FINAL_MESSAGE = `Happy Birthday, my favorite person.
+export const FINAL_MESSAGE = `Happy Birthday, ${siteProfile.recipientName}.
 
-I made this tiny little world so you could click through a trail of smiles, teasing, prizes, and soft feelings and end up exactly where you belong: surrounded by love.
+เราทำโลกจิ๋วใบนี้ไว้ให้คุนค่อย ๆ กดผ่านทางเดินของรอยยิ้ม มุกแหย่เล่น รางวัลเล็ก ๆ และความรู้สึกนุ่มฟู จนมาจบตรงที่คุนควรอยู่ที่สุด นั่นคือท่ามกลางความรักเยอะ ๆ
 
-I hope this year brings you warm mornings, proud little victories, sweet surprises, and so many reasons to laugh until your cheeks hurt.
+ขอให้ปีนี้ของคุนมีเช้าที่อบอุ่น มีชัยชนะเล็ก ๆ ที่น่าภูมิใจ มีเซอร์ไพรส์ดี ๆ มีกาชา Wuthering Waves ที่ใจดีกับคุนขึ้นอีกนิด และมีหลายวันมากพอให้คุนได้หัวเราะจนแก้มปวด
 
-Thank you for being wonderful in all the ways that are loud, quiet, brave, silly, and beautifully you.
+ขอบคุณที่เป็นคุนในทุกเวอร์ชัน ทั้งตอนเบียว ตอนซน ตอนใจดี ตอนจริงจัง ตอนหวีด Vergil, HIGGS, Joel หรือตอนเปิด Nirvana แล้วทำหน้ามี lore ของตัวเอง และตอนที่เป็นตัวเองอย่างน่ารักที่สุด
 
-Today is yours, and I hope it feels full of comfort, celebration, and the kind of happiness that stays glowing long after the candles are gone.`
+วันนี้เป็นวันของคุน และเราอยากให้มันเต็มไปด้วยความสบายใจ การฉลอง ของกินที่มีปลา สีแดงที่คุนชอบ และความสุขแบบที่ยังเรือง ๆ อยู่แม้เค้กจะหมด เทียนจะดับ และอาร์ควันเกิดตอนนี้จะจบไปแล้วก็ตาม`

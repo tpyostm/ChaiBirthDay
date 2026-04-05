@@ -1,51 +1,42 @@
+import introPhoto from '../assets/intro-photo.jpg'
+import { siteProfile } from '../data'
+
 type IntroPageProps = {
   onContinue: () => void
 }
 
 export function IntroPage({ onContinue }: IntroPageProps) {
   return (
-    <div className="page-shell grid min-h-[70vh] items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="page-shell grid min-h-[70vh] items-center gap-6 lg:grid-cols-[1fr_0.92fr] lg:gap-8">
       <div className="space-y-6 text-left">
-        <p className="font-body text-sm uppercase tracking-[0.35em] text-rose-500">A birthday surprise just for you</p>
+        <span className="sticker sticker-yellow">{siteProfile.coverSticker}</span>
         <div className="space-y-4">
-          <h2 className="font-display text-5xl leading-tight text-slate-900 sm:text-6xl">
-            Happy Birthday,
+          <h2 className="scribble-title text-5xl leading-tight text-[#473625] sm:text-6xl">
+            ภารกิจของคุณในวันนี้นะครับ
             <br />
-            cutie.
+            (CHAI APPROVES)
           </h2>
-          <p className="max-w-xl text-lg leading-8 text-slate-700 sm:text-xl">
-            This is not just a page. It is a tiny handmade birthday journey filled with soft hearts, playful teasing,
-            little rewards, and one very sincere ending waiting for you.
+          <p className="max-w-xl handwritten text-2xl leading-8 text-[#5f4a37] sm:text-[1.7rem]">
+            จงเผชิญหน้ากับภารกิจที่กำลังจะเจอข้างหน้าเพื่อรับของขวัญสุด Exclusive ที่จัดเตรียมมาเพื่อคุณโดยเฉพาะ หากคุณพร้อมแล้ว
+            กดปุ่มข้างล่างเพื่อลุยต่อได้เลย!!
           </p>
         </div>
+        <div className="doodle-divider max-w-lg" />
         <div className="flex flex-wrap gap-3">
           <button type="button" className="primary-button" onClick={onContinue}>
-            Continue
+            เริ่มภารกิจ
           </button>
-          <div className="rounded-full bg-white/80 px-5 py-3 text-sm font-semibold text-rose-500 shadow-sm">
-            Warning: extreme birthday affection ahead
-          </div>
+          <div className="sticker sticker-sky">{siteProfile.warningSticker}</div>
         </div>
       </div>
 
-      <div className="glass-card relative overflow-hidden p-6">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.95),_transparent_58%)]" />
-        <div className="relative mx-auto aspect-square max-w-md rounded-[32px] bg-[linear-gradient(160deg,_rgba(255,255,255,0.9),_rgba(251,113,133,0.28))] p-6 shadow-inner">
-          <div className="absolute left-5 top-5 rounded-full bg-rose-100 px-4 py-2 text-sm font-bold text-rose-600">
-            Birthday Delivery
-          </div>
-          <div className="mt-16 grid gap-4">
-            {['Cute questions', 'Present reveal', 'Lucky reward', 'Heartfelt ending'].map((item, index) => (
-              <div
-                key={item}
-                className="animate-[fadeUp_0.7s_ease-out] rounded-[24px] border border-white/70 bg-white/80 px-5 py-4 text-left shadow-[0_10px_24px_rgba(244,63,94,0.14)]"
-                style={{ animationDelay: `${index * 0.12}s` }}
-              >
-                <p className="font-display text-2xl text-rose-600">{`0${index + 1}`}</p>
-                <p className="font-semibold text-slate-700">{item}</p>
-              </div>
-            ))}
-          </div>
+      <div className="glass-card overflow-hidden p-3 sm:p-4">
+        <div className="overflow-hidden rounded-[24px] border-[3px] border-[#8d7252] bg-white shadow-[0_14px_32px_rgba(15,23,42,0.08)]">
+          <img
+            src={introPhoto}
+            alt="ภาพประกอบเปิดภารกิจวันเกิด"
+            className="aspect-square w-full object-cover object-center"
+          />
         </div>
       </div>
     </div>

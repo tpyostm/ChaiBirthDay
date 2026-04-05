@@ -2,8 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 
 const melody = [523.25, 659.25, 783.99, 659.25, 698.46, 587.33, 523.25]
 
+type AudioWindow = Window &
+  typeof globalThis & {
+    webkitAudioContext?: typeof AudioContext
+  }
+
 export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const contextRef = useRef<AudioContext | null>(null)
   const timeoutRef = useRef<number | null>(null)
   const noteIndexRef = useRef(0)
@@ -25,16 +31,29 @@ export function MusicToggle() {
   const togglePlayback = async () => {
     if (isPlaying) {
       setIsPlaying(false)
+      noteIndexRef.current = 0
       if (timeoutRef.current) {
         window.clearTimeout(timeoutRef.current)
       }
       return
     }
 
-    const context = contextRef.current ?? new window.AudioContext()
-    contextRef.current = context
-    await context.resume()
-    setIsPlaying(true)
+    const audioWindow = window as AudioWindow
+    const AudioContextClass = audioWindow.AudioContext ?? audioWindow.webkitAudioContext
+    if (!AudioContextClass) {
+      setErrorMessage('This browser cannot play the birthday melody here.')
+      return
+    }
+
+    try {
+      const context = contextRef.current ?? new AudioContextClass()
+      contextRef.current = context
+      await context.resume()
+      setErrorMessage(null)
+      setIsPlaying(true)
+    } catch {
+      setErrorMessage('The birthday melody could not start on this browser.')
+    }
   }
 
   useEffect(() => {
@@ -81,8 +100,20 @@ export function MusicToggle() {
   }, [isPlaying])
 
   return (
-    <button type="button" className="secondary-button" onClick={() => void togglePlayback()}>
-      {isPlaying ? 'Pause birthday melody' : 'Play birthday melody'}
-    </button>
+    <div className="space-y-3">
+      <button
+        type="button"
+        aria-pressed={isPlaying}
+        className="secondary-button"
+        onClick={() => void togglePlayback()}
+      >
+        {isPlaying ? 'Pause birthday melody' : 'Play birthday melody'}
+      </button>
+      {errorMessage && (
+        <p aria-live="polite" className="handwritten text-xl text-[#cb5a5e]">
+          {errorMessage}
+        </p>
+      )}
+    </div>
   )
 }
