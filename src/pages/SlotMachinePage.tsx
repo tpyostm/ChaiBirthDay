@@ -110,7 +110,7 @@ export function SlotMachinePage({
         </div>
 
         <p aria-live="polite" className="mt-4 text-center handwritten text-2xl text-[#8a3b2d]">
-          {currentResult ? `รางวัลที่ได้: ${currentResult}` : 'กดสุ่มได้เลย แล้วมาดูกันว่ากาชาจะใจดีกับคุนไหม'}
+          {currentResult ? `รางวัลที่ได้: ${currentResult}` : 'กดสุ่มแล้วแคปมาด้วยนะ เป็นหลักฐานแลกของรางวัล'}
         </p>
       </div>
     </div>
